@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- see on kommentaar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* css kommentaar */
+        .char {
+            width:20px;
+            height:20px;
+            background: aquamarine;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .char:hover {
+            background: darkslateblue;
+        }
+        .end-char {
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            margin-left: 10px;
+            background: lightsteelblue;
+        }
+    </style>
+</head>
+<body>
+<div id="end_word"></div>
+<div id="chars">
+
+</div>
+</body>
+</html>
+
+<script>
+    //http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    }
+    $(document).ready(function () {
+        var charArray = [];
+        var word = "string";
+        // komentaar
+        /* mitme rea kommentaar */
+        for (var i = 0; i < word.length; i++) {
+            $("#end_word")
+                    .append("<div class='end-char' data-char='"+word.charAt(i)+"' ></div>");
+        }
+        for (var i = 0; i < word.length; i++) {
+            charArray.push(i);
+            shuffle(charArray);
+
+        }
+        for(var i = 0; i < word.length; i++) {
+            $("#chars")
+                    .append("<div class='char'>" + word.charAt(charArray[i]) + "</div>");
+        }
+        $(".char").draggable();
+        $(".end-char").droppable({
+            drop: function (event, ui) {
+                if($(this).data("char") === $(ui.draggable).html()) {
+                    alert("qige t2ht");
+                }
+            }
+        });
+
+        //int t2isarv = 20;
+        $("#chars").click(function () {
+            $(this).css("background-color", "red");
+        });
+    })
+
+</script>
